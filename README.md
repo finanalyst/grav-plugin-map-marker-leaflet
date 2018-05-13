@@ -65,7 +65,7 @@ The plugin provides two shortcodes:
             - symbol -- Typically a single letter. No spaces.
             - enum -- (true if option present) a MapQuestPlugin option that adds the point index to the symbol, will only work for `type` = **flag**
     - content:
-        - A JSON **Array** of points in the form [ <latitude>, <longitude> ]
+        - A JSON **Array** of points in the form [ `latitude`, `longitude` ]
 
 ### Example
 The following code is in <path to grav>/user/map/default.md
