@@ -1,0 +1,11 @@
+{% for point in points %}
+    L.marker([{{ point[0] }},{{ point[1] }}], {icon: L.mapquest.icons.{{type}}(
+        {
+          primaryColor: {{ primaryColor }},
+          secondaryColor: {{ secondaryColor }},
+          shadow: {% if shadow %}true{% else %}false{% endif %},
+          size: {{ size }},
+          symbol: {{ symbol }}{% if enum and type is same as('flag') %}+{{ loop.index }}{% endif %}
+          })
+        }).addTo(map);
+{% endfor %}
