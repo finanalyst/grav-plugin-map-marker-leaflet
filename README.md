@@ -59,13 +59,20 @@ The plugin provides two shortcodes:
     - options:
             - primaryColor -- a colour code
             - secondaryColor
-            - shadow -- ( true if shadow option present )
+            - shadow -- ( true if shadow option present, default false )
             - size  -- see MapQuest documentation
+            - draggable -- see MapQuest documentation
+            - title -- text for the popup
             - type -- an option of this plugin. This plugin has been tested only for the values **marker** and **flag**. Others might work.
             - symbol -- Typically a single letter. No spaces.
-            - enum -- (true if option present) a MapQuestPlugin option that adds the point index to the symbol, will only work for `type` = **flag**
+            - enum -- (true if option present, default false) a MapQuestPlugin option that adds the point index to the symbol, will only work for `type` = **flag**
+            - array_of_hash -- should be present for hash type json (see below)
     - content:
-        - A JSON **Array** of points in the form [ `latitude`, `longitude` ]
+        - A JSON **Array** of points in one of two forms
+            1. When no `array_of_hash` present, then an array of points as  
+            [ `latitude`, `longitude` ]
+            2. When `array_of_hash` present, then points in the form:  
+            `{title: 'popup text', lat: 122.222, lng: 22.9 }`
 
 ### Example
 The following code is in <path to grav>/user/map/default.md

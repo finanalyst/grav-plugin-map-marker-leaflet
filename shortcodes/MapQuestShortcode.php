@@ -10,11 +10,15 @@ class MapQuestShortcode extends Shortcode {
             $this->grav['assets']->addJs("https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js");
             $this->grav['assets']->addCss("https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.css");
             $s = $sc->getContent();
+            $twig = $this->twig;
             // process any twig variables in the markercode
-            $s = $this->grav['twig']->processString($s);
+            if (is_string($s) ) $s = $twig->processString($s);
             $markercode = html_entity_decode(preg_replace('/\<\/?p.*?\>/i',' ',$s));
             $params = $sc->getParameters();
-            $output = $this->twig->processTemplate('partials/mapquest.html.twig',
+            foreach ($params as $k => $v) {
+                if (is_string($v)) $params[$k] = $twig->processString($v);
+            }
+            $output = $twig->processTemplate('partials/mapquest.html.twig',
                 [
                     'apikey' => $apikey,
                     'mapname' =>  isset( $params['mapname'] )? $params['mapname'] : 'map',
