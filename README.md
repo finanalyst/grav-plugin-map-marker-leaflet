@@ -49,24 +49,24 @@ The following example demonstrates how to embed an interactive map and place on 
 The plugin provides two shortcodes:
 - `[map-quest]`
     - options:
-            - lat -- the latitude of the centre of the map, defaults to the data in the example.
-            - lng -- the longitude of the centre of the map
-            - zoom -- an integer from 1-20, see MapQuest documentation. Defaults to 15.
+        - lat -- the latitude of the centre of the map, defaults to the data in the example.
+        - lng -- the longitude of the centre of the map
+        - zoom -- an integer from 1-20, see MapQuest documentation. Defaults to 15.
     - contents:
         - Empty, in which case only a map is generated.
         - A set of `marker` codes.
 - `[marker]`
     - options:
-            - primaryColor -- a colour code
-            - secondaryColor
-            - shadow -- ( true if shadow option present, default false )
-            - size  -- see MapQuest documentation
-            - draggable -- see MapQuest documentation
-            - title -- text for the popup
-            - type -- an option of this plugin. This plugin has been tested only for the values **marker** and **flag**. Others might work.
-            - symbol -- Typically a single letter. No spaces.
-            - enum -- (true if option present, default false) a MapQuestPlugin option that adds the point index to the symbol, will only work for `type` = **flag**
-            - array_of_hash -- should be present for hash type json (see below)
+        - primaryColor -- a colour code
+        - secondaryColor
+        - shadow -- ( true if shadow option present, default false )
+        - size  -- see MapQuest documentation
+        - draggable -- see MapQuest documentation
+        - title -- text for the popup
+        - type -- an option of this plugin. This plugin has been tested only for the values **marker** and **flag**. Others might work.
+        - symbol -- Typically a single letter. No spaces.
+        - enum -- (true if option present, default false) a MapQuestPlugin option that adds the point index to the symbol, will only work for `type` = **flag**
+        - array_of_hash -- should be present for hash type json (see below)
     - content:
         - A JSON **Array** of points in one of two forms
             1. When no `array_of_hash` present, then an array of points as  
