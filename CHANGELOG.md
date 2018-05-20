@@ -1,3 +1,8 @@
+# v1.0.2
+## 20 May 2018
+1. [](Update)
+    * instantiate blank titles and points in case of no valid json in marker shortcode.
+
 # v1.0.1
 ## 15 May 2018
 1. [](update)

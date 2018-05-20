@@ -16,6 +16,8 @@ class MapQuestMarkerShortcode extends Shortcode
             foreach ($params as $k => $v){
                 if (is_string($v)) $params[$k] = $twig->processString($v);
             }
+            $titles = [];
+            $points = [];
             if (array_key_exists('array_of_hash', $params) ) {
                 foreach ($json as $k => $v ) {
                     $points[$k][0] = $v->{'lat'};
