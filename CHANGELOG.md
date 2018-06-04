@@ -1,3 +1,8 @@
+# v1.0.3
+## 4 June 2018
+1. [](Update)
+    * If no json for marker data cannot be decoded, then null is returned, so only map shown
+    
 # v1.0.2
 ## 20 May 2018
 1. [](Update)

@@ -12,6 +12,9 @@ class MapQuestMarkerShortcode extends Shortcode
             // process any twig variables in the markercode
             $s = $twig->processString($s);
             $json = json_decode( html_entity_decode(preg_replace('/\<\/?p.*?\>|\n/i',' ',$s)) );
+            if ( $json == Null ) {
+                return $json; // Not valid json, so retun nothing. Only map will be shown
+            }
             $params = $sc->getParameters();
             foreach ($params as $k => $v){
                 if (is_string($v)) $params[$k] = $twig->processString($v);
@@ -22,7 +25,7 @@ class MapQuestMarkerShortcode extends Shortcode
                 foreach ($json as $k => $v ) {
                     $points[$k][0] = $v->{'lat'};
                     $points[$k][1] = $v->{'lng'};
-                    if (isset($v->{'title'})) $titles[$k] =  $v->{'title'}?:'';
+                    if (isset($v->{'title'})) $titles[$k] =  htmlentities($v->{'title'}?:'');
                 }
             } else $points = $json;
             $output = $twig->processTemplate('partials/mapquestmarker.html.twig',
