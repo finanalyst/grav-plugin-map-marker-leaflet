@@ -1,3 +1,9 @@
+# v1.0.5
+## 11 June 2018
+1. [](Bugfix)
+    * TileLayer should be set to 'map' even if id of <div> element is set by 'mapname'.
+    * If Markercode returns empty array then, output is Null, not Empty Array.
+
 # v1.0.4
 ## 7 June 2018
 1. [](Update)

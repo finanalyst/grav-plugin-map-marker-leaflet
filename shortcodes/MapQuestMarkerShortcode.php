@@ -11,9 +11,10 @@ class MapQuestMarkerShortcode extends Shortcode
             $twig = $this->grav['twig'];
             // process any twig variables in the markercode
             $s = $twig->processString($s);
-            $json = json_decode( html_entity_decode(preg_replace('/\<\/?p.*?\>|\n/i',' ',$s)) );
-            if ( $json == Null ) {
-                return $json; // Not valid json, so retun nothing. Only map will be shown
+            $s = preg_replace('/\\<\\/?p.*?\\>|\\n|\\s/i','',$s);
+            $json = json_decode( html_entity_decode($s) );
+            if ( $json == Null || count($json) < 1)  {
+                return Null; // Not valid json or empty array, so retun nothing. Only map will be shown
             }
             $params = $sc->getParameters();
             foreach ($params as $k => $v){

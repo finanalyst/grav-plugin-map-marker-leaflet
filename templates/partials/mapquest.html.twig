@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
     L.mapquest.key = '{{apikey}}';
     var map = L.mapquest.map('{{mapname}}', {
           center: [{{lat}}, {{lng}}],
-          layers: L.mapquest.tileLayer('{{mapname}}'),
+          layers: L.mapquest.tileLayer('map'),
           zoom: {{zoom}}
         });
 {{ markercode }}
