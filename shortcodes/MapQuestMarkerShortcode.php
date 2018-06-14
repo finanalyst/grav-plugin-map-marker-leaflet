@@ -22,22 +22,31 @@ class MapQuestMarkerShortcode extends Shortcode
             }
             $titles = [];
             $points = [];
+            $pc = [];
+            $sc = [];
+            $sz = [];
             if (array_key_exists('array_of_hash', $params) ) {
                 foreach ($json as $k => $v ) {
                     $points[$k][0] = $v->{'lat'};
                     $points[$k][1] = $v->{'lng'};
                     if (isset($v->{'title'})) $titles[$k] =  htmlentities($v->{'title'}?:'');
+                    if (isset($v->{'prim'})) $pc[$k] =  htmlentities($v->{'prim'}?:'');
+                    if (isset($v->{'scnd'})) $sc[$k] =  htmlentities($v->{'scnd'}?:'');
+                    if (isset($v->{'size'})) $sz[$k] =  htmlentities($v->{'size'}?:'');
                 }
             } else $points = $json;
             $output = $twig->processTemplate('partials/mapquestmarker.html.twig',
                 [
                     'points' => $points,
                     'titles' => $titles,
+                    'pc' => $pc,
+                    'sc' => $sc,
+                    'sz' => $sz,
                     'primaryColor' =>  isset($params['primaryColor'] )?  $params['primaryColor'] : '#22407F',
                     'secondaryColor' => isset( $params['secondaryColor'] )? $params['secondaryColor'] : '#ff5998',
+                    'size' => isset( $params['size'] )? $params['size'] : 'sm',
                     'shadow' =>  array_key_exists('shadow', $params),
                     'enum' =>  array_key_exists('enum', $params),
-                    'size' => isset( $params['size'] )? $params['size'] : 'sm',
                     'type' => isset( $params['type'] )? $params['type'] : 'marker',
                     'symbol' =>  isset( $params['symbol'] )? $params['symbol'] : '',
                     'draggable' => array_key_exists('draggable',$params)

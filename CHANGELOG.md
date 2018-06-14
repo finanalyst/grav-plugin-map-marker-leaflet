@@ -1,3 +1,8 @@
+# v1.0.6
+## 14 June 2018
+1. [](#Enhancement)
+    * Enum option is made available for marker as well as flag
+    * Added option to provide primaryColor, secondaryColor, and size for each marker individually from within json content of marker shortcode.
 # v1.0.5
 ## 11 June 2018
 1. [](Bugfix)

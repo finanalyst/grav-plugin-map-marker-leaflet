@@ -59,20 +59,31 @@ The plugin provides two shortcodes:
     - options:
         - primaryColor -- a colour code
         - secondaryColor
+        - size  -- can be `sm`, `md`, `lg`, see MapQuest documentation
         - shadow -- ( true if shadow option present, default false )
-        - size  -- see MapQuest documentation
         - draggable -- see MapQuest documentation
-        - title -- text for the popup
+        - title -- an array of strings, for the popup for each marker. No provision for the same text in all markers.
+        All the strings must be short (see MapQuest)
         - type -- an option of this plugin. This plugin has been tested only for the values **marker** and **flag**. Others might work.
-        - symbol -- Typically a single letter. No spaces.
-        - enum -- (true if option present, default false) a MapQuestPlugin option that adds the point index to the symbol, will only work for `type` = **flag**
+        - symbol
+            - If `type` = **marker**, then a single letter.
+            - If `type` = **flag**, then short text, no spaces.
+        - enum -- (true if option present, default false) a MapQuestPlugin option that adds the point index to the symbol,
+            - if `type` = **flag**, then index of array, in order given in json, is appended onto `symbol` text
+            - if `type` = **marker** (or other), then index is made to be `symbol` text of marker, and if `symbol`
+            is defined within the shortcode, then it is ignored. Note that the index may only go to 999.
         - array_of_hash -- should be present for hash type json (see below)
     - content:
         - A JSON **Array** of points in one of two forms
             1. When no `array_of_hash` present, then an array of points as  
             [ `latitude`, `longitude` ]
             2. When `array_of_hash` present, then points in the form:  
-            `{title: 'popup text', lat: 122.222, lng: 22.9 }`
+            `{title: 'popup text', lat: 122.222, lng: 22.9, prim: '#123456' , scnd: '#fedcba', size: 'md'}`
+        - In the hash `lat` and `lng` are mandatory, and the others are optional. But if a field is given for one marker, it must be given for all markers.
+            - `title` -- the text for the popup of the marker
+            - `prim` -- primary colour code for the marker. If `prim` is present in a hash, then primaryColor is ignored)
+            - `scnd` -- secondary colour code for the marker. If `scnd` is present in a hash, then secondaryColor is ignored)
+            - `size` -- the size code for the marker. If `size` is present in a hash, then the `size` option (above) is ignored.
 
 ### Example
 The following code is in <path to grav>/user/map/default.md
