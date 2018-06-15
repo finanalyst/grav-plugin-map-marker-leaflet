@@ -57,22 +57,22 @@ The plugin provides two shortcodes:
         - A set of `marker` codes.
 - `[marker]`
     - options:
-        - primaryColor -- a colour code
-        - secondaryColor
+        - primaryColor -- a colour code, defaults to '#22407F'
+        - secondaryColor -- a colour code, defaults to '#ff5998'
         - size  -- can be `sm`, `md`, `lg`, see MapQuest documentation
-        - shadow -- ( true if shadow option present, default false )
-        - draggable -- see MapQuest documentation
+        - shadow -- By default False. True if either option is present, or given as shadow=True
+        - draggable -- see MapQuest documentation. By default False. True if either option is present, or given as draggable=True
         - title -- an array of strings, for the popup for each marker. No provision for the same text in all markers.
         All the strings must be short (see MapQuest)
-        - type -- an option of this plugin. This plugin has been tested only for the values **marker** and **flag**. Others might work.
+        - type -- a MapQuestPlugin option. This plugin has been tested only for the values **marker** and **flag**. Others might work.
         - symbol
             - If `type` = **marker**, then a single letter.
             - If `type` = **flag**, then short text, no spaces.
-        - enum -- (true if option present, default false) a MapQuestPlugin option that adds the point index to the symbol,
-            - if `type` = **flag**, then index of array, in order given in json, is appended onto `symbol` text
-            - if `type` = **marker** (or other), then index is made to be `symbol` text of marker, and if `symbol`
+        - enum -- a MapQuestPlugin option that adds the point index to the symbol. By default False. True if either option is present, or given as draggable=True.
+            - if `enum` is True and`type` = **flag**, then index of the array, in the order given in the json, is appended onto `symbol` text
+            - if `enum` is True and `type` = **marker** (or other), then index is made to be `symbol` text of marker, and if `symbol`
             is defined within the shortcode, then it is ignored. Note that the index may only go to 999.
-        - array_of_hash -- should be present for hash type json (see below)
+        - array_of_hash -- a MapQuestPlugin option. It should be present for hash type json (see below). By default False. True if either option is present, or given as draggable=True
     - content:
         - A JSON **Array** of points in one of two forms
             1. When no `array_of_hash` present, then an array of points as  

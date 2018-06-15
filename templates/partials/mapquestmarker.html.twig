@@ -6,13 +6,7 @@
           secondaryColor: {% if sc %}'{{sc[loop.index0]}}'{% else %}{{ secondaryColor }}{% endif %},
           shadow: {% if shadow %}true{% else %}false{% endif %},
           size: {% if sz %}'{{sz[loop.index0]}}'{% else %}{{ size }}{% endif %},
-          symbol:
-            {% if type is same as('flag') %}
-                {{ symbol }}
-                {% if enum %}+{{ loop.index }}{% endif %}
-            {% else %}
-                {% if enum %}{{ loop.index }}{% else %}{{ symbol }}{% endif %}
-            {% endif %}
+          symbol:{% if type is same as('flag') %}{{ symbol }}{% if enum %}+{{ loop.index }}{% endif %}{% else %}{% if enum %}{{ loop.index }}{% else %}{{ symbol }}{% endif %}{% endif %}
           })
           {% if titles %}, title: "{{ titles[loop.index0] }}"{% endif %}
           {% if draggable %}, draggable: true{% endif %}

@@ -1,3 +1,8 @@
+#v1.0.7
+## 15 June 2018
+1. [](#Update)
+    * Allow enum, shadow, array_of_hash, draggable to be given as 'Option' or 'Option'=True
+
 # v1.0.6
 ## 14 June 2018
 1. [](#Enhancement)

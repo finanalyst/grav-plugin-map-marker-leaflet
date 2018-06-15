@@ -25,7 +25,7 @@ class MapQuestMarkerShortcode extends Shortcode
             $pc = [];
             $sc = [];
             $sz = [];
-            if (array_key_exists('array_of_hash', $params) ) {
+            if ( array_key_exists('array_of_hash', $params) && (empty($params['array_of_hash'])  || $params['array_of_hash'] == 'True' ) ) {
                 foreach ($json as $k => $v ) {
                     $points[$k][0] = $v->{'lat'};
                     $points[$k][1] = $v->{'lng'};
@@ -45,11 +45,11 @@ class MapQuestMarkerShortcode extends Shortcode
                     'primaryColor' =>  isset($params['primaryColor'] )?  $params['primaryColor'] : '#22407F',
                     'secondaryColor' => isset( $params['secondaryColor'] )? $params['secondaryColor'] : '#ff5998',
                     'size' => isset( $params['size'] )? $params['size'] : 'sm',
-                    'shadow' =>  array_key_exists('shadow', $params),
-                    'enum' =>  array_key_exists('enum', $params),
+                    'shadow' =>  array_key_exists('shadow', $params) && (empty($params['shadow'])  || $params['shadow'] == 'True' ),
+                    'enum' =>  array_key_exists('enum', $params) && (empty($params['enum'])  || $params['enum'] == 'True' ),
                     'type' => isset( $params['type'] )? $params['type'] : 'marker',
                     'symbol' =>  isset( $params['symbol'] )? $params['symbol'] : '',
-                    'draggable' => array_key_exists('draggable',$params)
+                    'draggable' =>array_key_exists('draggable', $params) && (empty($params['draggable'])  || $params['draggable'] == 'True' )
                 ]);
             return $output;
         });
