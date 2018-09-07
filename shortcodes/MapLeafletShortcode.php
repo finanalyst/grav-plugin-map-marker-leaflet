@@ -2,13 +2,12 @@
 namespace Grav\Plugin\Shortcodes;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 
-class MapQuestShortcode extends Shortcode {
+class MapLeafletShortcode extends Shortcode {
     public function init() {
-        $this->shortcode->getHandlers()->add('map-quest', function(ShortcodeInterface $sc) {
-            $apikey = $this->grav['config']->get('plugins.map-quest.api_key');
+        $this->shortcode->getHandlers()->add('map-leaflet', function(ShortcodeInterface $sc) {
             //add assets
-            $this->grav['assets']->addJs("https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.js");
-            $this->grav['assets']->addCss("https://api.mqcdn.com/sdk/mapquest-js/v1.3.1/mapquest.css");
+            $this->grav['assets']->addJs("https://unpkg.com/leaflet@1.3.4/dist/leaflet.js");
+            $this->grav['assets']->addCss("https://unpkg.com/leaflet@1.3.4/dist/leaflet.css");
             $twig = $this->twig;
             $s = $sc->getContent();
             $markercode = '';
@@ -23,11 +22,14 @@ class MapQuestShortcode extends Shortcode {
             }
             $output = $twig->processTemplate('partials/mapquest.html.twig',
                 [
-                    'apikey' => $apikey,
+                    'apikey' => $this->grav['config']->get('plugins.map-leaflet.mapbox_api_key'),
+                    'mapstyle' => $this->grav['config']->get('plugins.map-leaflet.mapbox_style'),
                     'mapname' =>  isset( $params['mapname'] )? $params['mapname'] : 'map',
-                    'lat' => isset( $params['lat'] )? $params['lat'] : '37.7749',
-                    'lng' =>  isset( $params['lng'] )? $params['lng'] : '-122.4194',
-                    'zoom' => isset( $params['zoom'] )? $params['zoom'] : '15',
+                    'lat' => isset( $params['lat'] )? $params['lat'] : '51.505',
+                    'lng' =>  isset( $params['lng'] )? $params['lng'] : '-0.09',
+                    'zoom' => isset( $params['zoom'] )? $params['zoom'] : '13',
+                    'width' => isset( $params['width'])? $params['width'] : '100%',
+                    'width' => isset( $params['height'])? $params['height'] : '530px',
                     'markercode' => $markercode
                 ]);
             return $output;

@@ -4,7 +4,7 @@ namespace Grav\Plugin;
 use Grav\Common\Plugin;
 use RocketTheme\Toolbox\Event\Event;
 
-class MapQuestPlugin extends Plugin
+class MapLeafletPlugin extends Plugin
 {
     public static function getSubscribedEvents()
     {

@@ -1,33 +1,49 @@
-name: Map Quest
-version: 1.0.7
-description: Short code to embed an interactive MapQuest map into a page
+name: Map Leaflet
+version: 1.0.0
+description: Short code to embed an interactive map into a page using Leaflet, MapBox and OpenStreetMap
 icon: map
 author:
   name: Richard N Hainsworth
   email: rnhainsworth@gmail.com
-homepage: https://github.com/finanalyst/grav-plugin-map-quest
+homepage: https://github.com/finanalyst/grav-plugin-map-leaflet
 keywords: grav, plugin, mapquest, map
-bugs: https://github.com/finanalyst/grav-plugin-map-quest/issues
-docs: https://github.com/finanalyst/grav-plugin-map-quest/blob/develop/README.md
+bugs: https://github.com/finanalyst/grav-plugin-map-leaflet/issues
+docs: https://github.com/finanalyst/grav-plugin-map-leaflet/blob/develop/README.md
 license: MIT
 
 dependencies:
-  - shortcode-core
+    - shortcode-core
 
 form:
-  validation: strict
-  fields:
-    enabled:
-      type: toggle
-      label: Plugin status
-      highlight: 1
-      default: 0
-      options:
-        1: Enabled
-        0: Disabled
-      validate:
-        type: bool
-    api_key:
-      type: text
-      label: API Key
-      help: You must register an API key with MapQuest and include it here
+    validation: strict
+    fields:
+        enabled:
+            type: toggle
+            label: Plugin status
+            highlight: 1
+            default: 0
+            options:
+                1: Enabled
+                0: Disabled
+            validate:
+                type: bool
+        mapbox_api_key:
+            type: text
+            label: MapBox API Key
+            help: You should register your own API key with MapBox and include it here
+            default:  'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A'
+        mapbox_style:
+            type: select
+            label: Map Style
+            options:
+                streets: Streets
+                outdoors: View with elevations
+                light: Light
+                dark: Dark
+                satellite: Satellite
+                satellite-streets: Satellite & Streets
+                navigation-preview-day: Navigation Preview Day
+                navigation-preview-night: Navigation Preview Night
+                navigation-guidance-day: Navigation Guidance Day
+                navigation-guidance-night: Navigation Guidance Night
+            default: streets
