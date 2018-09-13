@@ -19,7 +19,6 @@ class MapLeafletPlugin extends Plugin
         if ($this->isAdmin()) {
             return;
         }
-
         // Enable the main events we are interested in
         $this->enable([
             'onShortcodeHandlers' => ['onShortcodeHandlers', 0],

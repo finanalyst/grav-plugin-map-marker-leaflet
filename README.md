@@ -1,6 +1,14 @@
 # Map Leaflet Plugin
 
-The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Short code to use the [Leaflet js library](https://leafletjs.com), together with a map from [MapBox](https://www.mapbox.com). MapBox has its own js library, but the Leaflet one is used here as it is closest to the original MapQuest plugin this is based on.
+The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). Fancy styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com).
+
+## Purpose
+
+Google changed its policy - effective June 2018 - about maps so that a credit card account had to be provided to access parts of the map api. OpenStreetMap provides map data as a community service, and Leaflet provides an opensource js library to access the map data. Maps can be enhanced by other third-party providers, who - like Google (at the time of writing) - require an apikey, but unlike Google do not require bank details.
+
+This plugin was written to provide an alternative to the `map-google` plugin and is based on `map-quest`.
+
+Since OpenStreetMap provides tiles without charge, there are limitations on use and the service should not be treated with respect. 
 
 ## Installation
 
@@ -36,12 +44,19 @@ Here is the default configuration and an explanation of available options:
 
 ```yaml
 enabled: true
-mapbox_api_key: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A'
-mapbox_style: outdoors
+provider: opensteetmap
+m-style: 'mapbox.streets'
+t-style: 'cycle'
 ```
-> WARNING the `api_key` string above is a generic key and should work. You need to [obtain a valid MapBox key](https://www.mapbox.com).
 
-The mapbox style is a part of the Map Box toolkit, not Leaflet.
+- provider If the Admin plugin is used, then three provider options are provided.
+    1. OpenStreetMap - no further options are needed
+    1. Thunderforest - two further options are given
+        1. apikey - the provider requires an apikey, which for hobbyists is free.
+        1. t-style - the style of the map. A list of available options is given
+    1. MapBox
+        1. apikey - as above
+        1. m-style - as t-style above.
 
 Note that if you use the admin plugin, a file with your configuration, and named map-leaflet.yaml will be saved in the `user/config/plugins/` folder once the configuration is saved in the admin.
 
@@ -60,82 +75,64 @@ The plugin provides two shortcodes:
     - contents:
         - Empty, in which case only a map is generated.
         - A set of `marker` codes.
-- `[marker]`
-    - options:
-        - primaryColor -- a colour code, defaults to '#22407F'
-        - secondaryColor -- a colour code, defaults to '#ff5998'
-        - size  -- can be `sm`, `md`, `lg`, see MapLeaflet documentation
-        - shadow -- By default False. True if either option is present, or given as shadow=True
-        - draggable -- see MapLeaflet documentation. By default False. True if either option is present, or given as draggable=True
-        - title -- an array of strings, for the popup for each marker. No provision for the same text in all markers.
-        All the strings must be short (see MapLeaflet)
-        - type -- a MapLeafletPlugin option. This plugin has been tested only for the values **marker** and **flag**. Others might work.
-        - symbol
-            - If `type` = **marker**, then a single letter.
-            - If `type` = **flag**, then short text, no spaces.
-        - enum -- a MapLeafletPlugin option that adds the point index to the symbol. By default False. True if either option is present, or given as draggable=True.
-            - if `enum` is True and`type` = **flag**, then index of the array, in the order given in the json, is appended onto `symbol` text
-            - if `enum` is True and `type` = **marker** (or other), then index is made to be `symbol` text of marker, and if `symbol`
-            is defined within the shortcode, then it is ignored. Note that the index may only go to 999.
-        - array_of_hash -- a MapLeafletPlugin option. It should be present for hash type json (see below). By default False. True if either option is present, or given as draggable=True
-    - content:
-        - A JSON **Array** of points in one of two forms
-            1. When no `array_of_hash` present, then an array of points as  
-            [ `latitude`, `longitude` ]
-            2. When `array_of_hash` present, then points in the form:  
-            `{title: 'popup text', lat: 122.222, lng: 22.9, prim: '#123456' , scnd: '#fedcba', size: 'md'}`
-        - In the hash `lat` and `lng` are mandatory, and the others are optional. But if a field is given for one marker, it must be given for all markers.
-            - `title` -- the text for the popup of the marker
-            - `prim` -- primary colour code for the marker. If `prim` is present in a hash, then primaryColor is ignored)
-            - `scnd` -- secondary colour code for the marker. If `scnd` is present in a hash, then secondaryColor is ignored)
-            - `size` -- the size code for the marker. If `size` is present in a hash, then the `size` option (above) is ignored.
+- `[awesome-markers]`
+    - options that if they are included in the shortcode become the default for each marker:
+        - `markerColor` -- one of 'red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpurple', 'cadetblue' (default = 'blue')
+        -` iconColor` -- an HTML colour code, (default = 'white')
+        - `draggable` -- see MapLeaflet documentation. By default False. True if either option is present, or given as draggable=True
+        - `spin` -- the icon spins (default = False), can be set as for draggable
+    - content between opening and closing shortcodes:
+        - A JSON **Array** of **Hash**, eg
+            `{"title": "popup text", "lat": 122.222, "lng": 22.9, "markerColor": "red" , "icon": "coffee" }`
+        - `lat` and `lng` are mandatory, and the others are optional. If not included, the default value is given to them.
+            - `title` -- the text for the popup of the marker (default = '')
+            - `text` -- the text inside the marker (default = '') Should be kept short.
+            - `markerColor`,` iconColor`,`draggable` and `spin` can be set in the hash or a default set in the shortcode.
 
 ### Example
 The following code is in <path to grav>/user/map/default.md
 ```yaml
 ---
-title: MapLeaflet Test
+title: MapLeaflet
 cache_enable: false
 ---
-[map-leaflet lat=37.7749 lng=-122.4194 zoom=12]
-[marker primaryColor='#22407F'
-secondaryColor='#ff5998'
-size='sm'
-symbol='O'
+[map-leaflet lat=37.7749 lng=-122.4194 zoom=13]
+[a-markers markerColor="darkblue"
+iconColor="white"
 ]
-[[37.7749, -122.4194]]
-[/marker]
-[marker primaryColor='#277650'
-secondaryColor='#AA5639'
-shadow
-size='md'
-symbol= 'K'
-type=flag
-enum
+[{ "lat": 37.7749, "lng": -122.4194, "icon": "home", "title": "Home Position" } ]
+[/a-markers]
+[a-markers icon=""]
+[  { "lat": 37.775,  "lng": -122.48 , "text": 1, "draggable": true  },
+{ "lat":  37.77,  "lng": -122.414 , "text": 2, "markerColor": "cadetblue" },
+{ "lat":   37.765,  "lng": -122.409, "text": 3, "spin": true },
+{ "lat":   37.76,  "lng": -122.3995, "text": 4, "spin": false },
+{ "lat":   37.755,  "lng": -122.499, "icon": "coffee", "markerColor": "red", "title": "Lovely bistro"}
 ]
-[ [  37.775,  -122.42 ],
-[  37.77,  -122.414 ],
-[  37.765,  -122.409 ],
-[  37.76,  -122.3995 ],
-[  37.755,  -122.399 ]
-]
-[/marker]
+[/a-markers]
 [/map-leaflet]
 
 ```
 ### Comments
-- cache_enable should be set to false as there has to be a call to MapLeaflet to get the data.
+- cache_enable should be set to false as there has to be a call to the tile provider to get the data.
+- Any of the fontawesome icons can be included as markers.
+- Any alphanumeric text can be included, but too many characters > 3? will be ugly.
+- OpenStreetMap is the repository for map tiles, Leaflet is the library for managing the map tiles. However, styling the maps is subjective and there are multiple providers, such as Thunderforest and MapBox.
 
 ### Disclaimer
-The coordinates in this illustration are derived from a Leaflet example and have no meaning.
+The coordinates in this illustration have no meaning.
 
 ### Limitations
 - Due to the simple implementation of the shortcode, it is possible that there should only be one map on one page. It is possible that if more maps are defined, the marker will be placed on each, or only one, map.
-- In the `marker` option, there are limitations for valid symbols
-- In the `flag` option, there are limitations on the text (it seems no spaces and a short character count).
+- do not set both 'text' and 'icon' for each marker.
 
 ## Credits
 
-Awesome work Leaflet, MapBox and OpenStreetMap.
+- Awesome work by Leaflet, OpenStreetMap, Thunderforest and MapBox.
+- The `a-markers` js and css are based on the [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) but with modifications from [StackOverflow rockXrock](https://stackoverflow.com/a/25563023/6293949).
+    - modifications: added 'salmon' to colors (missed in original)
+    - allowed for text in marker
 
 ## To Do
+- Generalise the map provider list, initializing plugin from providers.yaml, so to add a new provider can be done by adding an entry to providers.yaml.
+    - This will happen if a use case is requested.

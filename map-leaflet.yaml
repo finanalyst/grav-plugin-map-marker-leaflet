@@ -1,3 +1,5 @@
 enabled: true
-mapbox_api_key: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NDg1bDA1cjYzM280NHJ5NzlvNDMifQ.d6e-nNyBDtmQCVwVNivz7A'
-mapbox_style: outdoors
+provider: openstreetmap
+apikey:
+t-style: cycle
+m-style: 'mapbox.streets'

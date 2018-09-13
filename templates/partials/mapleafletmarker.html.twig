@@ -1,14 +1,13 @@
-{% for point in points %}
-    L.marker([{{ point[0] }},{{ point[1] }}], {
-        icon: L.mapquest.icons.{{type}}(
-        {
-          primaryColor: {% if pc %}'{{pc[loop.index0]}}'{% else %}{{ primaryColor }}{% endif %},
-          secondaryColor: {% if sc %}'{{sc[loop.index0]}}'{% else %}{{ secondaryColor }}{% endif %},
-          shadow: {% if shadow %}true{% else %}false{% endif %},
-          size: {% if sz %}'{{sz[loop.index0]}}'{% else %}{{ size }}{% endif %},
-          symbol:{% if type is same as('flag') %}{{ symbol }}{% if enum %}+{{ loop.index }}{% endif %}{% else %}{% if enum %}{{ loop.index }}{% else %}{{ symbol }}{% endif %}{% endif %}
+{% for mk in mks %}
+    L.marker([{{ mk.lat }},{{ mk.lng }}], {
+        icon: L.AwesomeMarkers.icon({
+          markerColor: '{{ mk.mcol }}',
+          iconColor: '{{ mk.icol }}'
+          {% if mk.spin %}, spin: '{{ mk.spin }}'{% endif %}
+          {% if mk.icon %}, icon: '{{ mk.icon }}'{% endif %}
+          {% if mk.text %}, text: '{{ mk.text }}'{% endif %}
           })
-          {% if titles %}, title: "{{ titles[loop.index0] }}"{% endif %}
-          {% if draggable %}, draggable: true{% endif %}
+          {% if mk.title %}, title: '{{ mk.title }}'{% endif %}
+          {% if mk.drag %}, draggable: {{ mk.drag }}{% endif %}
         }).addTo(map);
 {% endfor %}
