@@ -1,5 +1,5 @@
 name: Map Leaflet
-version: 1.0.0
+version: 1.0.1
 description: Short code to embed an interactive map using Leaflet and OpenStreetMap (optionally other providers)
 icon: map
 author:

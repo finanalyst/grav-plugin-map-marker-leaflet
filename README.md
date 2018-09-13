@@ -8,7 +8,7 @@ Google changed its policy - effective June 2018 - about maps so that a credit ca
 
 This plugin was written to provide an alternative to the `map-google` plugin and is based on `map-quest`.
 
-Since OpenStreetMap provides tiles without charge, there are limitations on use and the service should not be treated with respect. 
+Since OpenStreetMap provides tiles without charge, there are limitations on use and the service should not be treated with respect.
 
 ## Installation
 
@@ -75,9 +75,9 @@ The plugin provides two shortcodes:
     - contents:
         - Empty, in which case only a map is generated.
         - A set of `marker` codes.
-- `[awesome-markers]`
+- `[a-markers]`
     - options that if they are included in the shortcode become the default for each marker:
-        - `markerColor` -- one of 'red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpurple', 'cadetblue' (default = 'blue')
+        - `markerColor` -- one of colors listed below  (default = 'blue')
         -` iconColor` -- an HTML colour code, (default = 'white')
         - `draggable` -- see MapLeaflet documentation. By default False. True if either option is present, or given as draggable=True
         - `spin` -- the icon spins (default = False), can be set as for draggable
@@ -89,6 +89,16 @@ The plugin provides two shortcodes:
             - `text` -- the text inside the marker (default = '') Should be kept short.
             - `markerColor`,` iconColor`,`draggable` and `spin` can be set in the hash or a default set in the shortcode.
 
+### Marker Colours
+Markers are coloured images, so only a finite number are possible. The following colors are provided:  
+| red | orange | green | blue |
+| purple | darkred | darkblue | darkgreen |
+| darkpurple | cadetblue | lightred | beige |
+| lightgreen | lightblue | pink | salmon |
+ |white | lightgray | gray | black |
+
+The colours correspond to:
+![](assets/images/markers-soft.png)
 ### Example
 The following code is in <path to grav>/user/map/default.md
 ```yaml
