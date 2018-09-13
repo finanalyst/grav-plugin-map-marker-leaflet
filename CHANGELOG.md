@@ -3,6 +3,7 @@
 1.[](#update)
     * extra colors listed
     * typo corrected
+    * README changed
 
 # v1.0.0
 ## 7 Sep 2018

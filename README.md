@@ -91,11 +91,13 @@ The plugin provides two shortcodes:
 
 ### Marker Colours
 Markers are coloured images, so only a finite number are possible. The following colors are provided:  
+| colour1 | colour2 | colour3 | colour4 |
+|---|---|---|---|
 | red | orange | green | blue |
 | purple | darkred | darkblue | darkgreen |
 | darkpurple | cadetblue | lightred | beige |
 | lightgreen | lightblue | pink | salmon |
- |white | lightgray | gray | black |
+|white | lightgray | gray | black |
 
 The colours correspond to:
 ![](assets/images/markers-soft.png)
