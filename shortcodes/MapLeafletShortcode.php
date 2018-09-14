@@ -5,39 +5,69 @@ use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 class MapLeafletShortcode extends Shortcode {
     public function init() {
         $this->shortcode->getHandlers()->add('map-leaflet', function(ShortcodeInterface $sc) {
+            $s = $sc->getContent();
+            $params = $sc->getParameters();
             //add assets
             $assets = $this->grav['assets'];
             $assets->addJs("https://unpkg.com/leaflet@1.3.4/dist/leaflet.js");
             $assets->addCss("https://unpkg.com/leaflet@1.3.4/dist/leaflet.css");
             //add leaflet awesome assets
-            $assets->addJs('plugin://map-leaflet/assets/leaflet.awesome-markers.js');
-            $assets->addCss('plugin://map-leaflet/assets/leaflet.awesome-markers.css');
+            $assets->addJs('plugin://map-marker-leaflet/assets/leaflet.awesome-markers.js');
+            $assets->addCss('plugin://map-marker-leaflet/assets/leaflet.awesome-markers.css');
             $twig = $this->twig;
-            $config = $this->config->get('plugins.map-leaflet');
+            $config = $this->config->get('plugins.map-marker-leaflet');
             switch ($config['provider']) {
                 case 'openstreetmap':
                     $tilestanza = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
                     $attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
                     $maxzoom = 17;
+                    $style = '';
+                    $apikey = '';
                     break;
                 case 'thunderforest':
-                    $tilestanza = "https://tile.thunderforest.com/" . $config['t-style'] . "/{z}/{x}/{y}.png?apikey=" . $config['apikey'] ;
+                    $tilestanza = "https://tile.thunderforest.com/{style}/{z}/{x}/{y}.png?apikey={apikey}";
                     $attribution =  'Maps &copy; <a href="www.thunderforest.com/">Thunderforest</a> Data &copy; <a href="www.opensteetmap.org/copyright">OpenStreetMap</a> contributors';
                     $maxzoom = 18;
+                    $apikey = $config['apikey'];
+                    $style = $config['t-style'];
+                    if (isset($params['style'])) {
+                        $opts = [
+                            'cycle' ,
+                            'transport' ,
+                            'landscape' ,
+                            'outdoors' ,
+                            'transport-dark' ,
+                            'spinal-map' ,
+                            'pioneer' ,
+                            'mobile-atlas' ,
+                            'neighbourhood'
+                        ]; // this should be taken from a yaml config. Hard code for the time being.
+                        if ( in_array( $params['style'], $opts) ) $style = $params['style'];
+                    }
                     break;
                 case 'mapbox':
-                    $tilestanza = "https://api.tiles.mapbox.com/v4/" . $config['m-style'] . "/{z}/{x}/{y}.png?access_token=" . $config['apikey'] ;
+                    $tilestanza = "https://api.tiles.mapbox.com/v4/{style}/{z}/{x}/{y}.png?access_token={apikey}";
                     $attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>';
                     $maxzoom = 24;
+                    $apikey = $config['apikey'];
+                    $style = $config['m-style'];
+                    if (isset($params['style'])) {
+                        $opts = [
+                            'mapbox.streets' ,
+                            'mapbox.outdoors' ,
+                            'mapbox.light' ,
+                            'mapbox.dark' ,
+                            'mapbox.satellite'
+                        ];
+                        if ( in_array( $params['style'], $opts) ) $style = $params['style'];
+                    }
             }
-            $s = $sc->getContent();
             $markercode = '';
             if (is_string($s) ) {
                 // process any twig variables in the markercode
                 $s = $twig->processString($s);
                 $markercode = html_entity_decode(preg_replace('/\<\/?p.*?\>/i',' ',$s));
             }
-            $params = $sc->getParameters();
             foreach ($params as $k => $v) {
                 if (is_string($v)) $params[$k] = $twig->processString($v);
             }
@@ -46,6 +76,8 @@ class MapLeafletShortcode extends Shortcode {
                     'tilestanza' => $tilestanza,
                     'attribution' => $attribution,
                     'maxzoom' => $maxzoom,
+                    'apikey' => $apikey,
+                    'style' => $style,
                     'mapname' =>  isset( $params['mapname'] )? $params['mapname'] : 'map',
                     'lat' => isset( $params['lat'] )? $params['lat'] : '51.505',
                     'lng' =>  isset( $params['lng'] )? $params['lng'] : '-0.09',

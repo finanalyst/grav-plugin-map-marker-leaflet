@@ -1,14 +1,14 @@
-name: Map Leaflet
-version: 1.0.1
-description: Short code to embed an interactive map using Leaflet and OpenStreetMap (optionally other providers)
+name: Map Marker Leaflet
+version: 1.0.0
+description: Short codes to embed a map and markers using Leaflet, Awesome-markers and OpenStreetMap (optionally other providers)
 icon: map
 author:
   name: Richard N Hainsworth
   email: rnhainsworth@gmail.com
-homepage: https://github.com/finanalyst/grav-plugin-map-leaflet
-keywords: grav, plugin, map, leaflet, openstreetmap, thunderforest, mapbox, opensource
-bugs: https://github.com/finanalyst/grav-plugin-map-leaflet/issues
-docs: https://github.com/finanalyst/grav-plugin-map-leaflet/blob/develop/README.md
+homepage: https://github.com/finanalyst/grav-plugin-map-marker-leaflet
+keywords: grav, plugin, map, markers, leaflet, openstreetmap, thunderforest, mapbox, opensource
+bugs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/issues
+docs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/blob/develop/README.md
 license: MIT
 
 dependencies:
@@ -36,7 +36,7 @@ form:
             default: openstreetmap
         thirdparty:
             type: conditional
-            condition: "not (config.plugins['map-leaflet'].provider == 'openstreetmap') "
+            condition: "not (config.plugins['map-marker-leaflet'].provider == 'openstreetmap') "
             fields:
                 apikey:
                     type: text
@@ -45,7 +45,7 @@ form:
                     default:  'querty'
                 mapboxstyle:
                     type: conditional
-                    condition: "config.plugins['map-leaflet'].provider == 'mapbox' "
+                    condition: "config.plugins['map-marker-leaflet'].provider == 'mapbox' "
                     fields:
                         m-style:
                             type: select
@@ -59,7 +59,7 @@ form:
                             default: 'mapbox.streets'
                 thunderforeststyle:
                     type: conditional
-                    condition: "config.plugins['map-leaflet'].provider == 'thunderforest' "
+                    condition: "config.plugins['map-marker-leaflet'].provider == 'thunderforest' "
                     fields:
                         t-style:
                             type: select

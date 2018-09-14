@@ -5,9 +5,9 @@
           iconColor: '{{ mk.icol }}'
           {% if mk.spin %}, spin: '{{ mk.spin }}'{% endif %}
           {% if mk.icon %}, icon: '{{ mk.icon }}'{% endif %}
-          {% if mk.text %}, text: '{{ mk.text }}'{% endif %}
+          {% if mk.text %}, text: "{{ mk.text }}"{% endif %}
           })
-          {% if mk.title %}, title: '{{ mk.title }}'{% endif %}
+          {% if mk.title %}, title: "{{ mk.title }}"{% endif %}
           {% if mk.drag %}, draggable: {{ mk.drag }}{% endif %}
         }).addTo(map);
 {% endfor %}

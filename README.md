@@ -1,6 +1,6 @@
 # Map Leaflet Plugin
 
-The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). Fancy styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com).
+The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) is used for the markers. Enhanced map styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com), but requires an api key (royalty free options are available).
 
 ## Purpose
 
@@ -102,30 +102,58 @@ Markers are coloured images, so only a finite number are possible. The following
 
 The colours correspond to:
 ![](assets/images/markers-soft.png)
+
 ### Example
 The following code is in <path to grav>/user/map/default.md
 ```yaml
 ---
-title: MapLeaflet
+title: Maps
 cache_enable: false
 ---
-[map-leaflet lat=37.7749 lng=-122.4194 zoom=13]
+# London Neighbourhoods
+[map-leaflet lat=51.505 lng=-0.09 zoom=13 mapname=neighbourhood style=neighbourhood]
 [a-markers markerColor="darkblue"
 iconColor="white"
 ]
 [{ "lat": 37.7749, "lng": -122.4194, "icon": "home", "title": "Home Position" } ]
 [/a-markers]
 [a-markers icon=""]
+[  { "lat": 51.505,  "lng": -0.09 , "text": 1, "draggable": true  },
+{ "lat":  51.515,  "lng": -0.1 , "text": 2, "markerColor": "cadetblue" },
+{ "lat":   51.515,  "lng": -0.14, "text": 3, "spin": true },
+{ "lat":   51.505,  "lng": 0, "text": 4, "spin": false },
+{ "lat":   51.525,  "lng": -0.01, "icon": "coffee", "markerColor": "red", "title": "Lovely bistro"}
+]
+[/a-markers]
+[/map-leaflet]
+
+# San Fransico Transport
+[map-leaflet lat=37.7749 lng=-122.4194 zoom=13 mapname=transd style=transport-dark]
+[a-markers markerColor="lightblue"
+iconColor="white"
+]
+[{ "lat": 37.7749, "lng": -122.4194, "icon": "home", "title": "Home Position" } ]
+[/a-markers]
+[a-markers icon=""]
 [  { "lat": 37.775,  "lng": -122.48 , "text": 1, "draggable": true  },
-{ "lat":  37.77,  "lng": -122.414 , "text": 2, "markerColor": "cadetblue" },
+{ "lat":  37.77,  "lng": -122.414 , "text": 2, "markerColor": "pink" },
 { "lat":   37.765,  "lng": -122.409, "text": 3, "spin": true },
 { "lat":   37.76,  "lng": -122.3995, "text": 4, "spin": false },
-{ "lat":   37.755,  "lng": -122.499, "icon": "coffee", "markerColor": "red", "title": "Lovely bistro"}
+{ "lat":   37.755,  "lng": -122.499, "icon": "coffee", "markerColor": "lightred", "title": "Lovely bistro"}
 ]
 [/a-markers]
 [/map-leaflet]
 
 ```
+
+First try this with OpenStreetMap. There are no styles, so the extra style information is discarded.
+
+Next, get an apikey from [Thunderforest Sign in](https://manage.thunderforest.com/users/sign_in) and add it to the plugin configuration.
+
+Next look at the maps in the example to see how styling can dramatically improve perception.
+
+Since the `style` can be changed inside the shortcode, different map styles can be given to the user to choose (for the two 3-party providers here). For example, a drop down box can be created in a form, and when the user responds with a map style change, it is included via Twig in the shortcode.
+
 ### Comments
 - cache_enable should be set to false as there has to be a call to the tile provider to get the data.
 - Any of the fontawesome icons can be included as markers.
@@ -142,10 +170,11 @@ The coordinates in this illustration have no meaning.
 ## Credits
 
 - Awesome work by Leaflet, OpenStreetMap, Thunderforest and MapBox.
-- The `a-markers` js and css are based on the [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) but with modifications from [StackOverflow rockXrock](https://stackoverflow.com/a/25563023/6293949).
-    - modifications: added 'salmon' to colors (missed in original)
+- The [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) js and css code have been modified based on [StackOverflow rockXrock](https://stackoverflow.com/a/25563023/6293949).
+    - added 'salmon' to colors (missed in original)
     - allowed for text in marker
 
 ## To Do
 - Generalise the map provider list, initializing plugin from providers.yaml, so to add a new provider can be done by adding an entry to providers.yaml.
     - This will happen if a use case is requested.
+- Add geoJSON code

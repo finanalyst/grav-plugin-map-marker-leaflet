@@ -5,6 +5,8 @@ jQuery(document).ready(function () {
     L.tileLayer('{{ tilestanza }}', {
         attribution: '{{ attribution }}',
         maxZoom: {{ maxzoom }}
+        {% if apikey %}, apikey: '{{ apikey }}'{% endif %}
+        {% if style %}, style: "{{ style}}"{% endif %}
     }).addTo(map);
 {{ markercode }}
 });
