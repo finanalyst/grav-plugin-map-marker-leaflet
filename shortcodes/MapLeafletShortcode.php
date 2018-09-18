@@ -84,6 +84,7 @@ class MapLeafletShortcode extends Shortcode {
                     'zoom' => isset( $params['zoom'] )? $params['zoom'] : '13',
                     'width' => isset( $params['width'])? $params['width'] : '100%',
                     'height' => isset( $params['height'])? $params['height'] : '530px',
+                    'classes' => isset( $params['classes'])? $params['classes'] : '',
                     'markercode' => $markercode
                 ]);
             return $output;

@@ -72,6 +72,7 @@ The plugin provides two shortcodes:
         - zoom -- an integer from 1-24, see MapLeaflet documentation. Defaults to 13.
         - width -- the width in browser coordinates for the map, defaults to 100%
         - height -- the height in browser coordinates, defaults to 530px
+        - classes -- adds value of `classes` to the **class** attribute of the **div** containing the map. Defaults to ''.
     - contents:
         - Empty, in which case only a map is generated.
         - A set of `marker` codes.
@@ -104,8 +105,8 @@ The colours correspond to:
 ![](assets/images/markers-soft.png)
 
 ### Example
-The following code is in <path to grav>/user/map/default.md
-```yaml
+The following code is in <path to grav>/user/pages/03.map/default.md
+```md
 ---
 title: Maps
 cache_enable: false
@@ -127,7 +128,7 @@ iconColor="white"
 [/a-markers]
 [/map-leaflet]
 
-# San Fransico Transport
+# San Fransisco Transport
 [map-leaflet lat=37.7749 lng=-122.4194 zoom=13 mapname=transd style=transport-dark]
 [a-markers markerColor="lightblue"
 iconColor="white"
