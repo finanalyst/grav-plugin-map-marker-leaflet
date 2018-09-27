@@ -1,5 +1,5 @@
 name: Map Marker Leaflet
-version: 1.0.1
+version: 1.0.3
 description: Short codes to embed a map and markers using Leaflet, Awesome-markers and OpenStreetMap (optionally other providers)
 icon: map
 author:

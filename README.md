@@ -70,9 +70,10 @@ The plugin provides two shortcodes:
         - lat -- the latitude of the centre of the map, defaults to 51.505 (London).
         - lng -- the longitude of the centre of the map  defaults to -0.09
         - zoom -- an integer from 1-24, see MapLeaflet documentation. Defaults to 13.
-        - width -- the width in browser coordinates for the map, defaults to 100%
-        - height -- the height in browser coordinates, defaults to 530px
+        - width -- the width in browser coordinates for the map, without a class defaults to 100% (see below).
+        - height -- the height in browser coordinates, without a class defaults to 530px (see below).
         - classes -- adds value of `classes` to the **class** attribute of the **div** containing the map. Defaults to ''.
+            - If `classes` is defined, then it is assumed one of the classes sets the *width* and *height* of the div (to allow for responsive map sizing). *width* and *height* must be set by a class in order for the map to be generated.
     - contents:
         - Empty, in which case only a map is generated.
         - A set of `marker` codes.
@@ -129,7 +130,7 @@ iconColor="white"
 [/map-leaflet]
 
 # San Fransisco Transport
-[map-leaflet lat=37.7749 lng=-122.4194 zoom=13 mapname=transd style=transport-dark]
+[map-leaflet lat=37.7749 lng=-122.4194 zoom=13 mapname=transd style=transport-dark ]
 [a-markers markerColor="lightblue"
 iconColor="white"
 ]
@@ -154,6 +155,8 @@ Next, get an apikey from [Thunderforest Sign in](https://manage.thunderforest.co
 Next look at the maps in the example to see how styling can dramatically improve perception.
 
 Since the `style` can be changed inside the shortcode, different map styles can be given to the user to choose (for the two 3-party providers here). For example, a drop down box can be created in a form, and when the user responds with a map style change, it is included via Twig in the shortcode.
+
+In the example, the map style is taken from the page header.
 
 ### Comments
 - cache_enable should be set to false as there has to be a call to the tile provider to get the data.
