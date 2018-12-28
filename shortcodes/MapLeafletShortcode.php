@@ -7,13 +7,6 @@ class MapLeafletShortcode extends Shortcode {
         $this->shortcode->getHandlers()->add('map-leaflet', function(ShortcodeInterface $sc) {
             $s = $sc->getContent();
             $params = $sc->getParameters();
-            //add assets
-            $assets = $this->grav['assets'];
-            $assets->addJs("https://unpkg.com/leaflet@1.3.4/dist/leaflet.js");
-            $assets->addCss("https://unpkg.com/leaflet@1.3.4/dist/leaflet.css");
-            //add leaflet awesome assets
-            $assets->addJs('plugin://map-marker-leaflet/assets/leaflet.awesome-markers.js');
-            $assets->addCss('plugin://map-marker-leaflet/assets/leaflet.awesome-markers.css');
             $twig = $this->twig;
             $config = $this->config->get('plugins.map-marker-leaflet');
             if (isset($params['style'])) {
@@ -28,7 +21,7 @@ class MapLeafletShortcode extends Shortcode {
                     $apikey = '';
                     break;
                 case 'thunderforest':
-                    $tilestanza = "https://tile.thunderforest.com/{style}/{z}/{x}/{y}.png?apikey={apikey}";
+                    $tilestanza = "https://tile.thunderforest.com/{style}/{z}/{x}/{y}{r}.png?apikey={apikey}";
                     $attribution =  'Maps &copy; <a href="www.thunderforest.com/">Thunderforest</a> Data &copy; <a href="www.opensteetmap.org/copyright">OpenStreetMap</a> contributors';
                     $maxzoom = 18;
                     $apikey = $config['apikey'];
@@ -88,6 +81,7 @@ class MapLeafletShortcode extends Shortcode {
                     'width' => $width,
                     'height' => $height,
                     'classes' => isset( $params['classes'])? $params['classes'] : '',
+                    'scale' => array_key_exists('scale', $params)? 'True' : '', # default is FALSE, when scale is not set
                     'markercode' => $markercode
                 ]);
             return $output;

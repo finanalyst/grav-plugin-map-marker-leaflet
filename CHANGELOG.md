@@ -1,3 +1,18 @@
+# v1.o.6
+## 28 Dec 2018
+1.[](#enhancement)
+    * modified Thunderforest stanza to allow for retina support.
+
+# v1.0.5
+## 10 Oct 2018
+1.[](#enhancement)
+    * added scale option to shortcode, default False (to be compatible with existing API)
+
+# v1.0.4
+## 4 Oct 2018
+1.[](#update)
+    * move asset adding from shortcode to plugin initialisation
+
 # v1.0.3
 ## 27 Sep 2018
 1.[](#update)

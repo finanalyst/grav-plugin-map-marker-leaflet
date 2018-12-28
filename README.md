@@ -72,6 +72,7 @@ The plugin provides two shortcodes:
         - zoom -- an integer from 1-24, see MapLeaflet documentation. Defaults to 13.
         - width -- the width in browser coordinates for the map, without a class defaults to 100% (see below).
         - height -- the height in browser coordinates, without a class defaults to 530px (see below).
+        - scale -- is either present or not present in shortcode. If present, then a Scale is shown; if not, no Scale is shown.
         - classes -- adds value of `classes` to the **class** attribute of the **div** containing the map. Defaults to ''.
             - If `classes` is defined, then it is assumed one of the classes sets the *width* and *height* of the div (to allow for responsive map sizing). *width* and *height* must be set by a class in order for the map to be generated.
     - contents:
@@ -113,7 +114,7 @@ title: Maps
 cache_enable: false
 ---
 # London Neighbourhoods
-[map-leaflet lat=51.505 lng=-0.09 zoom=13 mapname=neighbourhood style=neighbourhood]
+[map-leaflet lat=51.505 lng=-0.09 zoom=13 mapname=neighbourhood style=neighbourhood scale ]
 [a-markers markerColor="darkblue"
 iconColor="white"
 ]
@@ -177,6 +178,7 @@ The coordinates in this illustration have no meaning.
 - The [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) js and css code have been modified based on [StackOverflow rockXrock](https://stackoverflow.com/a/25563023/6293949).
     - added 'salmon' to colors (missed in original)
     - allowed for text in marker
+- [Timothy Armes](github.com/timothyarmes) - for Thunderforest improvement.
 
 ## To Do
 - Generalise the map provider list, initializing plugin from providers.yaml, so to add a new provider can be done by adding an entry to providers.yaml.

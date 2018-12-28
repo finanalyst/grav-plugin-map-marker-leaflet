@@ -8,6 +8,7 @@ jQuery(document).ready(function () {
         {% if apikey %}, apikey: '{{ apikey }}'{% endif %}
         {% if style %}, style: "{{ style}}"{% endif %}
     }).addTo(map);
+    {% if scale %}L.control.scale().addTo(map);{% endif %}
 {{ markercode }}
 });
 </script>
