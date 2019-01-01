@@ -1,3 +1,8 @@
+# v1.0.7
+## 1 Jan 2019
+1.[](#typo)
+    * in Readme, credit to githum/awrog
+
 # v1.o.6
 ## 28 Dec 2018
 1.[](#enhancement)
