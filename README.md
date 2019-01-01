@@ -8,7 +8,7 @@ Google changed its policy - effective June 2018 - about maps so that a credit ca
 
 This plugin was written to provide an alternative to the `map-google` plugin and is based on `map-quest`.
 
-Since OpenStreetMap provides tiles without charge, there are limitations on use and the service should not be treated with respect.
+Since OpenStreetMap provides tiles without charge, there are limitations on use and the service should be treated with respect.
 
 ## Installation
 
