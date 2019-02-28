@@ -1,5 +1,5 @@
 name: Map Marker Leaflet
-version: 1.0.7
+version: 1.0.8
 description: Short codes to embed a map and markers using Leaflet, Awesome-markers and OpenStreetMap (optionally other providers)
 icon: map
 author:
@@ -8,7 +8,7 @@ author:
 homepage: https://github.com/finanalyst/grav-plugin-map-marker-leaflet
 keywords: grav, plugin, map, markers, leaflet, openstreetmap, thunderforest, mapbox, opensource
 bugs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/issues
-docs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/blob/develop/README.md
+docs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/README.md
 license: MIT
 
 dependencies:

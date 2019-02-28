@@ -1,3 +1,8 @@
+# v1.0.8
+## 28 Feb 2019
+1.[](#typo)
+    * in blueprints for README
+
 # v1.0.7
 ## 1 Jan 2019
 1.[](#typo)
