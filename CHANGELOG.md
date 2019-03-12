@@ -1,3 +1,8 @@
+# v1.0.9
+## 12 March 2019
+1.[](#enhancement)
+    * Added wikimedia maps
+
 # v1.0.8
 ## 28 Feb 2019
 1.[](#typo)

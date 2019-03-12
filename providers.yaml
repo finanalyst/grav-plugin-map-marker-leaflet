@@ -36,3 +36,12 @@
         'mapbox.dark': Dark
         'mapbox.satellite': Satellite
     maxzoom: 24
+
+-
+    name: wikimedia
+    label: Wikimedia
+    tileref: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png'
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap contributors</a>, Imagery &copy; <a href="https://foundation.wikimedia.org/wiki/Home">Wikimedia</a>',
+    options:
+        None: none
+    maxzoom: 24
