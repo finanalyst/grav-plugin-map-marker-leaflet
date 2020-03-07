@@ -36,9 +36,9 @@ providers:
       - mapbox.satellite
     default: mapbox.streets
     maxzoom: 24
-  cartodb:
+  carto:
     tilestanza: 'https://{s}.basemaps.cartocdn.com/{variant}/{z}/{x}/{y}{r}.png'
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap contributors</a>, Imagery &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap contributors</a>, Imagery &copy; <a href="https://carto.com/attributions">Carto</a>'
     variants:
       - light_all
       - light_nolabels
