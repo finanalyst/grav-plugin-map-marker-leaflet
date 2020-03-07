@@ -1,11 +1,12 @@
 {% for mk in mks %}
     L.marker([{{ mk.lat }},{{ mk.lng }}], {
-        icon: L.AwesomeMarkers.icon({
+        icon: L.ExtraMarkers.icon({
           markerColor: '{{ mk.mcol }}',
           iconColor: '{{ mk.icol }}'
           {% if mk.spin %}, spin: '{{ mk.spin }}'{% endif %}
-          {% if mk.icon %}, icon: '{{ mk.icon }}'{% endif %}
-          {% if mk.text %}, text: "{{ mk.text }}"{% endif %}
+          {% if mk.text %}, number: "{{ mk.text }}", icon: 'fa-number'
+          {% elseif mk.icon %}, icon: '{{ mk.icon }}'
+          {% endif %}
           })
           {% if mk.title %}, title: "{{ mk.title }}"{% endif %}
           {% if mk.drag %}, draggable: {{ mk.drag }}{% endif %}
