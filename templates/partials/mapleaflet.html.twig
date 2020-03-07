@@ -1,12 +1,12 @@
 <div id="{{mapname}}" {% if classes %}class="{{classes}}"{% else %}style="width: {{ width }}; height: {{ height }};" {%endif %}></div>
 <script>
-jQuery(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
     var map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
     L.tileLayer('{{ tilestanza }}', {
         attribution: '{{ attribution }}',
         maxZoom: {{ maxzoom }}
         {% if apikey %}, apikey: '{{ apikey }}'{% endif %}
-        {% if style %}, style: "{{ style}}"{% endif %}
+        {% if variant %}, variant: "{{ variant}}"{% endif %}
     }).addTo(map);
     {% if scale %}L.control.scale().addTo(map);{% endif %}
 {{ markercode }}
