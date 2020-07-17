@@ -31,6 +31,8 @@ class MapMarkerLeafletPlugin extends Plugin
         //add leaflet awesome assets
         $assets->addJs('plugin://map-marker-leaflet/assets/leaflet.awesome-markers.js');
         $assets->addCss('plugin://map-marker-leaflet/assets/leaflet.awesome-markers.css');
+        // map-marker-leaflet.js for the plugins own js code
+        $assets->addJs('plugin://map-marker-leaflet/assets/map-marker-leaflet.js');
     }
 
     public function onTwigTemplatePaths()

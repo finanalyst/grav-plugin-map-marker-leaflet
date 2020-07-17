@@ -1,14 +1,6 @@
-<div id="{{mapname}}" {% if classes %}class="{{classes}}"{% else %}style="width: {{ width }}; height: {{ height }};" {%endif %}></div>
-<script>
-jQuery(document).ready(function () {
-    var map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
-    L.tileLayer('{{ tilestanza }}', {
-        attribution: '{{ attribution }}',
-        maxZoom: {{ maxzoom }}
-        {% if apikey %}, apikey: '{{ apikey }}'{% endif %}
-        {% if style %}, style: "{{ style}}"{% endif %}
-    }).addTo(map);
-    {% if scale %}L.control.scale().addTo(map);{% endif %}
+<!-- {{ mapname }} -->
+<div id="map_marker_leaflet_{{ mapkey }}" class="map_marker_leaflet_canvas{% if classes %} {{classes}}{% else %}" style="width:{{ width }}; height:{{ height }}{% endif %};"></div>
+<script type="text/javascript">
+{{ settings }}
 {{ markercode }}
-});
 </script>
