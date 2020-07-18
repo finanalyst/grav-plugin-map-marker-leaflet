@@ -2,6 +2,7 @@
 
 The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). [Extra-Marker Leaflet plugin](https://github.com/coryasilva/Leaflet.ExtraMarkers) is used for the markers. Enhanced map styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com), but requires an api key (royalty free options are available).
 
+
 ## Purpose
 
 Google changed its policy - effective June 2018 - about maps so that a credit card account had to be provided to access parts of the map api. OpenStreetMap provides map data as a community service, and Leaflet provides an opensource js library to access the map data. Maps can be enhanced by other third-party providers, who - like Google (at the time of writing) - require an apikey, but unlike Google do not require bank details.
@@ -45,18 +46,18 @@ Here is the default configuration and an explanation of available options:
 ```yaml
 enabled: true
 provider: opensteetmap
-m-style: 'mapbox.streets'
-t-style: 'cycle'
+variant:
+apikey:
 ```
 
 - provider If the Admin plugin is used, then three provider options are provided.
     1. OpenStreetMap - no further options are needed
     1. Thunderforest - two further options are given
         1. apikey - the provider requires an apikey, which for hobbyists is free.
-        1. t-style - the style of the map. A list of available options is given
+        1. variant - the style of the map. A list of available options is given (old t-style parameter is deprecated).
     1. MapBox
         1. apikey - as above
-        1. m-style - as t-style above.
+        1. variant - as above (old m-style parameter is deprecated).
 
 Note that if you use the admin plugin, a file with your configuration, and named map-leaflet.yaml will be saved in the `user/config/plugins/` folder once the configuration is saved in the admin.
 
@@ -73,6 +74,7 @@ The plugin provides two shortcodes:
         - width -- the width in browser coordinates for the map, without a class defaults to 100% (see below).
         - height -- the height in browser coordinates, without a class defaults to 530px (see below).
         - scale -- is either present or not present in shortcode. If present, then a Scale is shown; if not, no Scale is shown.
+        - variant -- override the variant configuration (old style option is deprecated).
         - classes -- adds value of `classes` to the **class** attribute of the **div** containing the map. Defaults to ''.
             - If `classes` is defined, then it is assumed one of the classes sets the *width* and *height* of the div (to allow for responsive map sizing). *width* and *height* must be set by a class in order for the map to be generated.
     - contents:
@@ -114,7 +116,7 @@ title: Maps
 cache_enable: false
 ---
 # London Neighbourhoods
-[map-leaflet lat=51.505 lng=-0.09 zoom=13 mapname=neighbourhood style=neighbourhood scale ]
+[map-leaflet lat=51.505 lng=-0.09 zoom=13 mapname=neighbourhood variant=neighbourhood scale ]
 [a-markers markerColor="darkblue"
 iconColor="white"
 ]
@@ -131,7 +133,7 @@ iconColor="white"
 [/map-leaflet]
 
 # San Fransisco Transport
-[map-leaflet lat=37.7749 lng=-122.4194 zoom=13 mapname=transd style=transport-dark ]
+[map-leaflet lat=37.7749 lng=-122.4194 zoom=13 mapname=transd variant=transport-dark ]
 [a-markers markerColor="lightblue"
 iconColor="white"
 ]
@@ -177,6 +179,7 @@ The coordinates in this illustration have no meaning.
 - Awesome work by Leaflet, OpenStreetMap, Thunderforest and MapBox.
 - [Extra-Marker Leaflet plugin](https://github.com/coryasilva/Leaflet.ExtraMarkers)
 - [Timothy Armes](github.com/timothyarmes) - for Thunderforest improvement.
+- @A---- for improving the providers and reducing dependencies
 
 ## To Do
 - Generalise the map provider list, initializing plugin from providers.yaml, so to add a new provider can be done by adding an entry to providers.yaml.

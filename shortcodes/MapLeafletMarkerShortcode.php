@@ -11,7 +11,7 @@ class MapLeafletMarkerShortcode extends Shortcode
             $twig = $this->grav['twig'];
             // process any twig variables in the markercode
             $s = $twig->processString($s);
-            $s = preg_replace('/\\<\\/?p.*?\\>|\\n|\\s/i','',$s);
+            $s = preg_replace('/\\<\\/?p.*?\\>/i','',$s);
             $json = json_decode( html_entity_decode($s) );
             if ( $json == Null || count($json) < 1)  {
                 return Null; // Not valid json or empty array, so retun nothing. Only map will be shown
