@@ -63,6 +63,37 @@ class MapLeafletShortcode extends Shortcode {
                 $height = isset( $params['height'])? $params['height'] : '530px';
                 $width = isset( $params['width'])? $params['width'] : '100%';
             }
+
+            static $mml_map_id;
+            if ( empty( $mml_map_id ) ) {
+              $mml_map_id = 1;
+            }
+            else {
+              $mml_map_id++;
+            }
+
+            $mapkey = 'mapkey_' . $mml_map_id;
+            $outparams = array(
+              'map_settings' => array(
+                'tilestanza' => $tilestanza,
+                'attribution' => $attribution,
+                'maxzoom' => $maxzoom,
+                'apikey' => $apikey,
+                'style' => $style,
+                'mapname' =>  isset( $params['mapname'] )? $params['mapname'] : 'map',
+                'lat' => isset( $params['lat'] )? $params['lat'] : '51.505',
+                'lng' =>  isset( $params['lng'] )? $params['lng'] : '-0.09',
+                'zoom' => isset( $params['zoom'] )? $params['zoom'] : '13',
+                'scale' => array_key_exists('scale', $params)? 'True' : '', # default is FALSE, when scale is not set
+              )
+            );
+
+            $outparams_j = '';
+            if ( $mml_map_id == 1 ) {
+              $outparams_j .= 'var map_marker_leaflet_settings = [];' . "\n";
+            }
+            $outparams_j .= 'map_marker_leaflet_settings["' . $mapkey . '"] = ' . json_encode($outparams) . ';';
+
             $output = $twig->processTemplate('partials/mapleaflet.html.twig',
                 array_merge(
                     $provider,
