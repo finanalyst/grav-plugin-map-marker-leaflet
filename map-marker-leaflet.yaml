@@ -1,5 +1,54 @@
 enabled: true
 provider: openstreetmap
 apikey:
-t-style: cycle
-m-style: 'mapbox.streets'
+variant:
+
+# More providers available here: https://github.com/leaflet-extras/leaflet-providers/blob/master/leaflet-providers.js
+providers:
+  openstreetmap:
+    tilestanza: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    variants:
+    maxzoom: 17
+  thunderforest:
+    tilestanza: 'https://tile.thunderforest.com/{variant}/{z}/{x}/{y}.png?apikey={apikey}'
+    attribution: 'Maps &copy; <a href="www.thunderforest.com/">Thunderforest</a> Data &copy; <a href="www.opensteetmap.org/copyright">OpenStreetMap</a> contributors'
+    variants:
+      - cycle
+      - transport
+      - landscape
+      - outdoors
+      - transport-dark
+      - spinal-map
+      - pioneer
+      - mobile-atlas
+      - neighbourhood
+    default: cycle
+    maxzoom: 18
+  mapbox:
+    tilestanza: 'https://api.tiles.mapbox.com/v4/{variant}/{z}/{x}/{y}.png?access_token={apikey}'
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap contributors</a>, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+    variants:
+      - mapbox.streets
+      - mapbox.outdoors
+      - mapbox.light
+      - mapbox.dark
+      - mapbox.satellite
+    default: mapbox.streets
+    maxzoom: 24
+  carto:
+    tilestanza: 'https://{s}.basemaps.cartocdn.com/{variant}/{z}/{x}/{y}{r}.png'
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap contributors</a>, Imagery &copy; <a href="https://carto.com/attributions">Carto</a>'
+    variants:
+      - light_all
+      - light_nolabels
+      - light_only_labels
+      - dark_all
+      - dark_nolabels
+      - dark_only_labels
+      - rastertiles/voyager
+      - rastertiles/voyager_nolabels
+      - rastertiles/voyager_only_labels
+      - rastertiles/voyager_labels_under
+    default: light_all
+    maxzoom: 19
