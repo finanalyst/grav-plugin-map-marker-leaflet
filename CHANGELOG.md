@@ -1,3 +1,10 @@
+
+# v1.1.0
+## 18 July 2020
+1.[](#Enhancement)
+   * Work by A----- to change the way map handlers are provided.
+   * Improvement of dependency handling
+   
 # v1.0.8
 ## 28 Feb 2019
 1.[](#typo)
