@@ -1,6 +1,7 @@
 # Map Leaflet Plugin
 
-The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) is used for the markers. Enhanced map styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com), but requires an api key (royalty free options are available). [Carto](https://carto.com/help/building-maps/basemap-list/) also is available.
+The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). [Extra-Marker Leaflet plugin](https://github.com/coryasilva/Leaflet.ExtraMarkers) is used for the markers. Enhanced map styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com), but requires an api key (royalty free options are available).
+
 
 ## Purpose
 
@@ -175,11 +176,10 @@ The coordinates in this illustration have no meaning.
 
 ## Credits
 
-- Awesome work by Leaflet, OpenStreetMap, Thunderforest, MapBox and Carto.
-- The [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) js and css code have been modified based on [StackOverflow rockXrock](https://stackoverflow.com/a/25563023/6293949).
-    - added 'salmon' to colors (missed in original)
-    - allowed for text in marker
+- Awesome work by Leaflet, OpenStreetMap, Thunderforest and MapBox.
+- [Extra-Marker Leaflet plugin](https://github.com/coryasilva/Leaflet.ExtraMarkers)
 - [Timothy Armes](github.com/timothyarmes) - for Thunderforest improvement.
+- @A---- for improving the providers and reducing dependencies
 
 ## To Do
 - Generalise the map provider list, initializing plugin from providers.yaml, so to add a new provider can be done by adding an entry to providers.yaml.

@@ -1,0 +1,22 @@
+{
+  "name": "map-marker-leaflet",
+  "version": "1.0.0",
+  "description": "The **Map Leaflet** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embed a map with markers using fontawesome icons or letters/numbers. Uses open source [Leaflet js library](https://leafletjs.com) with data from [OpenStreetMap](https://www.openstreetmap.org). [Awesome markers Leaflet plugin](https://github.com/lvoogdt/Leaflet.awesome-markers) is used for the markers. Enhanced map styling can be obtained from  [Thunderforest](https://www.thunderforest.com) or [MapBox](https://www.mapbox.com), but requires an api key (royalty free options are available).",
+  "private": true,
+  "dependencies": {
+    "leaflet": "^1.6.0",
+    "leaflet-extra-markers": "git+https://github.com/coryasilva/Leaflet.ExtraMarkers.git#v1.1.0"
+  },
+  "devDependencies": {
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.1.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "build": "webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC"
+}
