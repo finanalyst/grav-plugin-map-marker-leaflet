@@ -12,7 +12,6 @@ class MapLeafletShortcode extends Shortcode {
 
             $provider = [];
             if (isset($config['providers'][$config['provider']])) {
-
                 $providerFromList = $config['providers'][$config['provider']];
                 if (!is_array($providerFromList['variants'])) {
                     $variant = '';
@@ -25,9 +24,8 @@ class MapLeafletShortcode extends Shortcode {
                         $variant = $this->grav['twig']->processString($params['style']);
                     // m-style & t-style are deprecated configuration options
                     } else {
-                        $variant = $config['variant'] ?? $config['t-style'] ?? $config['m-style'];
+                        $variant = $providerFromList['variants'][ $config['preffered'] ];
                     }
-
                     $variant = in_array($variant, $providerFromList['variants']) ? $variant : $providerFromList['default'];
                 }
 
@@ -35,10 +33,10 @@ class MapLeafletShortcode extends Shortcode {
                     'tilestanza' => $providerFromList['tilestanza'],
                     'attribution' => $providerFromList['attribution'],
                     'maxzoom' => $providerFromList['maxzoom'],
-                    'apikey' => $providerFromList['maxzoom'],
+                    'apikey' => isset($providerFromList['apikey'])? $providerFromList['apikey'] : '',
                     'variant' => $variant
                 ];
-                
+
             }
             else {
                 $provider = [
@@ -72,27 +70,27 @@ class MapLeafletShortcode extends Shortcode {
               $mml_map_id++;
             }
 
-            $mapkey = 'mapkey_' . $mml_map_id;
-            $outparams = array(
-              'map_settings' => array(
-                'tilestanza' => $tilestanza,
-                'attribution' => $attribution,
-                'maxzoom' => $maxzoom,
-                'apikey' => $apikey,
-                'style' => $style,
-                'mapname' =>  isset( $params['mapname'] )? $params['mapname'] : 'map',
-                'lat' => isset( $params['lat'] )? $params['lat'] : '51.505',
-                'lng' =>  isset( $params['lng'] )? $params['lng'] : '-0.09',
-                'zoom' => isset( $params['zoom'] )? $params['zoom'] : '13',
-                'scale' => array_key_exists('scale', $params)? 'True' : '', # default is FALSE, when scale is not set
-              )
-            );
-
-            $outparams_j = '';
-            if ( $mml_map_id == 1 ) {
-              $outparams_j .= 'var map_marker_leaflet_settings = [];' . "\n";
-            }
-            $outparams_j .= 'map_marker_leaflet_settings["' . $mapkey . '"] = ' . json_encode($outparams) . ';';
+            // $mapkey = 'mapkey_' . $mml_map_id;
+            // $outparams = array(
+            //   'map_settings' => array(
+            //     'tilestanza' => $tilestanza,
+            //     'attribution' => $attribution,
+            //     'maxzoom' => $maxzoom,
+            //     'apikey' => $apikey,
+            //     'style' => $style,
+            //     'mapname' =>  isset( $params['mapname'] )? $params['mapname'] : 'map',
+            //     'lat' => isset( $params['lat'] )? $params['lat'] : '51.505',
+            //     'lng' =>  isset( $params['lng'] )? $params['lng'] : '-0.09',
+            //     'zoom' => isset( $params['zoom'] )? $params['zoom'] : '13',
+            //     'scale' => array_key_exists('scale', $params)? 'True' : '', # default is FALSE, when scale is not set
+            //   )
+            // );
+            //
+            // $outparams_j = '';
+            // if ( $mml_map_id == 1 ) {
+            //   $outparams_j .= 'var map_marker_leaflet_settings = [];' . "\n";
+            // }
+            // $outparams_j .= 'map_marker_leaflet_settings["' . $mapkey . '"] = ' . json_encode($outparams) . ';';
 
             $output = $twig->processTemplate('partials/mapleaflet.html.twig',
                 array_merge(

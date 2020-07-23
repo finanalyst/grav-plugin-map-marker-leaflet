@@ -1,7 +1,7 @@
 enabled: true
 provider: openstreetmap
 apikey:
-variant:
+preffered: 0
 
 # More providers available here: https://github.com/leaflet-extras/leaflet-providers/blob/master/leaflet-providers.js
 providers:
@@ -23,7 +23,6 @@ providers:
       - pioneer
       - mobile-atlas
       - neighbourhood
-    default: cycle
     maxzoom: 18
   mapbox:
     tilestanza: 'https://api.tiles.mapbox.com/v4/{variant}/{z}/{x}/{y}.png?access_token={apikey}'
@@ -34,7 +33,6 @@ providers:
       - mapbox.light
       - mapbox.dark
       - mapbox.satellite
-    default: mapbox.streets
     maxzoom: 24
   carto:
     tilestanza: 'https://{s}.basemaps.cartocdn.com/{variant}/{z}/{x}/{y}{r}.png'
@@ -50,5 +48,10 @@ providers:
       - rastertiles/voyager_nolabels
       - rastertiles/voyager_only_labels
       - rastertiles/voyager_labels_under
-    default: light_all
     maxzoom: 19
+    wikimedia:
+    tilestanza: "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &amp; <a href="https://wikimedia.org">Wikimedia</a>'
+    maxzoom: 24
+    apikey:
+    variant:

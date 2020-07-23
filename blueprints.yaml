@@ -1,6 +1,6 @@
 name: Map Marker Leaflet
-version: 1.1.0
-description: Short codes to embed a map and markers using Leaflet, Awesome-markers and OpenStreetMap (optionally other providers)
+version: 1.1.1
+description: Short codes to embed a map and markers using Leaflet, Extra-markers and OpenStreetMap (optionally other providers)
 icon: map
 author:
   name: Richard N Hainsworth
@@ -8,11 +8,11 @@ author:
 homepage: https://github.com/finanalyst/grav-plugin-map-marker-leaflet
 keywords: grav, plugin, map, markers, leaflet, openstreetmap, thunderforest, mapbox, opensource
 bugs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/issues
-docs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/README.md
+docs: https://github.com/finanalyst/grav-plugin-map-marker-leaflet/blob/master/README.md
 license: MIT
 
 dependencies:
-    - shortcode-core
+    shortcode-core: shortcode-core
 
 form:
     fields:
@@ -33,45 +33,70 @@ form:
                 openstreetmap: "Open Street Map"
                 thunderforest: Thunderforest
                 mapbox: Mapbox
+                carto: Carto
+                wikimedia: WikiMedia
             default: openstreetmap
-        thirdparty:
+        mapboxstyle:
             type: conditional
-            condition: "not (config.plugins['map-marker-leaflet'].provider == 'openstreetmap') "
+            condition: "config.plugins['map-marker-leaflet'].provider == 'mapbox' "
             fields:
-                apikey:
+                preffered:
+                    type: select
+                    label: "Map Box Style"
+                    options:
+                        - 'mapbox.streets'
+                        - 'mapbox.outdoors'
+                        - 'mapbox.light'
+                        - 'mapbox.dark'
+                        - 'mapbox.satellite'
+                    default: 0
+                providers.mapbox.apikey:
                     type: text
                     label: API Key from the provider
                     help: You should register your own API key with the provider and include it here
                     default:  'querty'
-                mapboxstyle:
-                    type: conditional
-                    condition: "config.plugins['map-marker-leaflet'].provider == 'mapbox' "
-                    fields:
-                        m-style:
-                            type: select
-                            label: "Map Box Style"
-                            options:
-                                'mapbox.streets': 'Streets'
-                                'mapbox.outdoors': 'Outdoors'
-                                'mapbox.light': 'Light'
-                                'mapbox.dark': 'Dark'
-                                'mapbox.satellite': 'Satellite'
-                            default: 'mapbox.streets'
-                thunderforeststyle:
-                    type: conditional
-                    condition: "config.plugins['map-marker-leaflet'].provider == 'thunderforest' "
-                    fields:
-                        t-style:
-                            type: select
-                            label: "Thunderforest Style"
-                            options:
-                                'cycle': 'OpenCycleMap'
-                                'transport': 'Transport'
-                                'landscape': 'Landscape'
-                                'outdoors': 'Outdoors'
-                                'transport-dark': 'Transport Dark'
-                                'spinal-map': 'Spinal Map'
-                                'pioneer': 'Pioneer'
-                                'mobile-atlas': 'Mobile Atlas'
-                                'neighbourhood': 'Neighbourhood'
-                            default: 'cycle'
+        thunderforeststyle:
+            type: conditional
+            condition: "config.plugins['map-marker-leaflet'].provider == 'thunderforest' "
+            fields:
+                preffered:
+                    type: select
+                    label: "Thunderforest Style"
+                    options:
+                        - 'cycle'
+                        - 'transport'
+                        - 'landscape'
+                        - 'outdoors'
+                        - 'transport-dark'
+                        - 'spinal-map'
+                        - 'pioneer'
+                        - 'mobile-atlas'
+                        - 'neighbourhood'
+                    default: 0
+                providers.thunderforest.apikey:
+                    type: text
+                    label: API Key from the provider
+                    help: You should register your own API key with the provider and include it here
+                    default:  'querty'
+        cartostyle:
+            type: conditional
+            condition: "config.plugins['map-marker-leaflet'].provider == 'carto' "
+            fields:
+                preffered:
+                    type: select
+                    label: "Carto Style"
+                    options:
+                        - 'light_all'
+                        - 'light_nolabels'
+                        - 'light_only_labels'
+                        - 'dark_all'
+                        - 'dark_nolabels'
+                        - 'dark_only_labels'
+                        - 'rastertiles/voyager'
+                        - 'rastertiles/voyager_nolabels'
+                        - 'rastertiles/voyager_only_labels'
+                        - 'rastertiles/voyager_labels_under'
+                    default: 0
+                providers.carto.apikey:
+                    type: hidden
+                    default:  ''

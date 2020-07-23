@@ -1,6 +1,6 @@
 <div id="{{mapname}}" {% if classes %}class="{{classes}}"{% else %}style="width: {{ width }}; height: {{ height }};" {%endif %}></div>
 <script>
-document.addEventListener('DOMContentLoaded', function(event) { 
+document.addEventListener('DOMContentLoaded', function(event) {
     var map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
     L.tileLayer('{{ tilestanza }}', {
         attribution: '{{ attribution }}',
@@ -10,4 +10,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }).addTo(map);
     {% if scale %}L.control.scale().addTo(map);{% endif %}
 {{ markercode }}
+})
 </script>
