@@ -2,6 +2,8 @@
 ## 22 December 2020
 1.[](#Gantry compatibility)
     * Gantry needs raw setting in templates
+2.[](Security)
+    * js vulnerability recommendation
 
 # v1.1.1
 ## 24 July 2020
