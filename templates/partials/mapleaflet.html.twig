@@ -1,14 +1,14 @@
-<div id="{{mapname}}" {% if classes %}class="{{classes}}"{% else %}style="width: {{ width }}; height: {{ height }};" {%endif %}></div>
+<div id="{{ mapname|raw }}" {% if classes %}class="{{ classes|raw }}"{% else %}style="width: {{ width|raw }}; height: {{ height|raw }};" {%endif %}></div>
 <script>
 document.addEventListener('DOMContentLoaded', function(event) {
-    var map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
-    L.tileLayer('{{ tilestanza }}', {
-        attribution: '{{ attribution }}',
-        maxZoom: {{ maxzoom }}
-        {% if apikey %}, apikey: '{{ apikey }}'{% endif %}
-        {% if variant %}, variant: "{{ variant}}"{% endif %}
-    }).addTo(map);
-    {% if scale %}L.control.scale().addTo(map);{% endif %}
-{{ markercode }}
+  var map = L.map('{{ mapname|raw }}').setView([{{ lat|raw }}, {{ lng|raw }}],{{ zoom|raw }});
+  L.tileLayer('{{ tilestanza|raw }}', {
+    attribution: '{{ attribution|raw }}',
+    maxZoom: {{ maxzoom|raw }}
+    {% if apikey %}, apikey: '{{ apikey|raw }}'{% endif %}
+    {% if variant %}, variant: "{{ variant|raw }}"{% endif %}
+  }).addTo(map);
+  {% if scale %}L.control.scale().addTo(map);{% endif %}
+{{ markercode|raw }}
 })
 </script>

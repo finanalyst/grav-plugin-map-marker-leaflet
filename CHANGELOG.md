@@ -1,3 +1,12 @@
+# v1.1.2
+## 22 December 2020
+1.[](#Gantry compatibility)
+    * Gantry needs raw setting in templates
+
+# v1.1.1
+## 24 July 2020
+1.[](#bugfixes)
+
 # v1.1.0
 ## 18 July 2020
 1.[](#Enhancement)
@@ -5,7 +14,7 @@
    * Improvement of dependency handling
 2.[](#security)
    * Require minimist >1.2.3 - github recommendation
-   
+
 # v1.0.8
 ## 28 Feb 2019
 1.[](#typo)

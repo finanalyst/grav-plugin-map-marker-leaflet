@@ -180,8 +180,10 @@ The coordinates in this illustration have no meaning.
 - [Extra-Marker Leaflet plugin](https://github.com/coryasilva/Leaflet.ExtraMarkers)
 - [Timothy Armes](github.com/timothyarmes) - for Thunderforest improvement.
 - @A---- for improving the providers and reducing dependencies
+- @lazybadger for correcting templates for Gantry
 
 ## To Do
+- Update README to reflect move to Extra-marker leaflet plugin (some legacy remarks related to previous marker plugin)
 - Generalise the map provider list, initializing plugin from providers.yaml, so to add a new provider can be done by adding an entry to providers.yaml.
     - This will happen if a use case is requested.
 - Add geoJSON code
